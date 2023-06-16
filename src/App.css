@@ -25,7 +25,7 @@
   color: var(--purple);
 }
 
-.create-task {
+.create-task form{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,6 +97,7 @@ button {
   border-top: 1px solid var(--gray-400);
   min-height: 244px;
   text-align: center;
+  color: white;
 }
 
 .all-tasks p {

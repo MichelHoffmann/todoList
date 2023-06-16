@@ -1,14 +1,28 @@
 import { ListChecks, PlusCircle, Rocket } from "@phosphor-icons/react";
+import nextId from "react-id-generator";
+
 import "./App.css";
 
-import { useState } from "react";
+import { FormEvent, ReactElement, useState } from "react";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<string[]>([]);
+  let taskInput: string;
 
-  setTasks(...tasks, "jhvjv");
+  function handleNewTask(event: React.ChangeEvent<HTMLInputElement>) {
+    taskInput = event.target.value;
+  }
 
-  function showTasks(tasks) {
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    createTask(taskInput);
+  }
+
+  function createTask(task: string) {
+    setTasks([...tasks, task]);
+  }
+
+  function showTasks(tasks: string[]) {
     if (tasks.length === 0) {
       return (
         <div>
@@ -22,7 +36,17 @@ function App() {
       );
     } else {
       return tasks.map((task) => {
-        return <li>{task}</li>;
+        return (
+          <div key={nextId()}>
+            <input
+              type="checkbox"
+              className="li-task"
+              value={task}
+              name="task"
+            />
+            <label htmlFor="task">{task}</label>
+          </div>
+        );
       });
     }
   }
@@ -37,11 +61,18 @@ function App() {
       </header>
       <main>
         <section className="create-task wrapper">
-          <input type="text" placeholder="Adicione uma nova tarefa" />
-          <button type="submit">
-            Criar
-            <PlusCircle />
-          </button>
+          <form>
+            <input
+              type="text"
+              placeholder="Adicione uma nova tarefa"
+              onChange={handleNewTask}
+              name="taskinput"
+            />
+            <button type="submit" onClick={handleSubmit}>
+              Criar
+              <PlusCircle />
+            </button>
+          </form>
         </section>
 
         <section className="task wrapper">
