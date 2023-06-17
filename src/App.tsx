@@ -1,4 +1,4 @@
-import { ListChecks, PlusCircle, Rocket } from "@phosphor-icons/react";
+import { ListChecks, PlusCircle, Rocket, Trash } from "@phosphor-icons/react";
 import nextId from "react-id-generator";
 
 import "./App.css";
@@ -7,15 +7,16 @@ import { FormEvent, ReactElement, useState } from "react";
 
 function App() {
   const [tasks, setTasks] = useState<string[]>([]);
-  let taskInput: string;
+  const [taskInput, setTaskInput] = useState("");
 
   function handleNewTask(event: React.ChangeEvent<HTMLInputElement>) {
-    taskInput = event.target.value;
+    setTaskInput(event.target.value);
   }
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     createTask(taskInput);
+    setTaskInput("");
   }
 
   function createTask(task: string) {
@@ -37,14 +38,13 @@ function App() {
     } else {
       return tasks.map((task) => {
         return (
-          <div key={nextId()}>
-            <input
-              type="checkbox"
-              className="li-task"
-              value={task}
-              name="task"
-            />
-            <label htmlFor="task">{task}</label>
+          <div key={nextId()} className="div-input">
+            <label className="container">
+              {task}
+              <input type="checkbox" />
+              <span className="checkmark"></span>
+            </label>
+            <Trash size={24} />
           </div>
         );
       });
@@ -66,7 +66,8 @@ function App() {
               type="text"
               placeholder="Adicione uma nova tarefa"
               onChange={handleNewTask}
-              name="taskinput"
+              value={taskInput}
+              id="taskInput"
             />
             <button type="submit" onClick={handleSubmit}>
               Criar
@@ -86,9 +87,7 @@ function App() {
               <p className="task-counter">{tasks.length}</p>
             </div>
           </div>
-          <div className="all-tasks">
-            <ul>{showTasks(tasks)}</ul>
-          </div>
+          <div className="all-tasks">{showTasks(tasks)}</div>
         </section>
       </main>
     </div>
