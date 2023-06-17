@@ -1,0 +1,73 @@
+.div-input {
+  background-color: var(--gray-500);
+  color: var(--gray-100);
+  width: 100%;
+  height: 72px;
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 0.875rem;
+  line-height: 1.225rem;
+
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.div-input .container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  padding-left: 40px;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+}
+.container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  border: 2px solid var(--blue);
+  background-color: var(--gray-400);
+  border-radius: 1rem;
+}
+
+.container:hover input ~ .checkmark {
+  border: 2px solid var(--blue-dark);
+}
+
+.container input:checked ~ .checkmark {
+  background-color: var(--purple-dark);
+  border: 2px solid var(--purple-dark);
+}
+
+.container input:checked ~ .checkmark:hover {
+  background-color: var(--purple);
+  border: 2px solid var(--purple);
+}
+
+.container .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}

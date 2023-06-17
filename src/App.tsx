@@ -1,9 +1,10 @@
-import { ListChecks, PlusCircle, Rocket, Trash } from "@phosphor-icons/react";
+import { PlusCircle, Rocket, ListChecks } from "@phosphor-icons/react";
 import nextId from "react-id-generator";
 
 import "./App.css";
 
-import { FormEvent, ReactElement, useState } from "react";
+import { FormEvent, useState } from "react";
+import { Task } from "./Components/Task";
 
 function App() {
   const [tasks, setTasks] = useState<string[]>([]);
@@ -21,34 +22,6 @@ function App() {
 
   function createTask(task: string) {
     setTasks([...tasks, task]);
-  }
-
-  function showTasks(tasks: string[]) {
-    if (tasks.length === 0) {
-      return (
-        <div>
-          <ListChecks size={56} color="#262626" />
-          <p>
-            <strong>Você ainda não tem tarefas cadastradas </strong>
-            <br />
-            Crie tarefas e organize seu itens a fazer
-          </p>
-        </div>
-      );
-    } else {
-      return tasks.map((task) => {
-        return (
-          <div key={nextId()} className="div-input">
-            <label className="container">
-              {task}
-              <input type="checkbox" />
-              <span className="checkmark"></span>
-            </label>
-            <Trash size={24} />
-          </div>
-        );
-      });
-    }
   }
 
   return (
@@ -84,10 +57,29 @@ function App() {
             </div>
             <div className="task-info-sub">
               <p>Concluidas</p>
-              <p className="task-counter">{tasks.length}</p>
+              <p className="task-counter">
+                {tasks.length} de {tasks.length}
+              </p>
             </div>
           </div>
-          <div className="all-tasks">{showTasks(tasks)}</div>
+          <div className="all-tasks">
+            {tasks.map((task) => {
+              if (tasks.length === 0) {
+                return (
+                  <div>
+                    <ListChecks size={56} color="#262626" />
+                    <p>
+                      <strong>Você ainda não tem tarefas cadastradas </strong>
+                      <br />
+                      Crie tarefas e organize seu itens a fazer
+                    </p>
+                  </div>
+                );
+              } else {
+                return <Task key={nextId()} task={task} />;
+              }
+            })}
+          </div>
         </section>
       </main>
     </div>
