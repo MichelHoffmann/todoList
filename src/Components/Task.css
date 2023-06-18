@@ -21,6 +21,15 @@
   padding-left: 40px;
 }
 
+.container p {
+  color: var(--gray-100);
+}
+
+.container .marked-task {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
 .container input {
   position: absolute;
   opacity: 0;

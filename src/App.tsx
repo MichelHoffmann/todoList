@@ -8,6 +8,7 @@ import { Task } from "./Components/Task";
 
 function App() {
   const [tasks, setTasks] = useState<string[]>([]);
+  const [markedTasks, setMarkedTesks] = useState<string[]>([])
   const [taskInput, setTaskInput] = useState("");
 
   function handleNewTask(event: React.ChangeEvent<HTMLInputElement>) {
@@ -58,7 +59,7 @@ function App() {
             <div className="task-info-sub">
               <p>Concluidas</p>
               <p className="task-counter">
-                {tasks.length} de {tasks.length}
+                {markedTasks.length} de {tasks.length}
               </p>
             </div>
           </div>
