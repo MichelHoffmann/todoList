@@ -8,8 +8,8 @@ import { Task } from "./Components/Task";
 
 function App() {
   const [tasks, setTasks] = useState<string[]>([]);
-  const [markedTasks, setMarkedTesks] = useState<string[]>([])
   const [taskInput, setTaskInput] = useState("");
+  const [markedTasks, setMarkedTasks] = useState(0);
 
   function handleNewTask(event: React.ChangeEvent<HTMLInputElement>) {
     setTaskInput(event.target.value);
@@ -23,6 +23,13 @@ function App() {
 
   function createTask(task: string) {
     setTasks([...tasks, task]);
+  }
+
+  function deleteTask(content: string) {
+    const undeletedTasks = tasks.filter((task) => {
+      return task != content;
+    });
+    setTasks(undeletedTasks);
   }
 
   return (
@@ -59,7 +66,7 @@ function App() {
             <div className="task-info-sub">
               <p>Concluidas</p>
               <p className="task-counter">
-                {markedTasks.length} de {tasks.length}
+                {markedTasks} de {tasks.length}
               </p>
             </div>
           </div>
@@ -77,7 +84,14 @@ function App() {
                   </div>
                 );
               } else {
-                return <Task key={nextId()} task={task} />;
+                return (
+                  <Task
+                    key={nextId()}
+                    task={task}
+                    deleteTask={deleteTask}
+                    setMarkedTasks={setMarkedTasks}
+                  />
+                );
               }
             })}
           </div>

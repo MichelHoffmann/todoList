@@ -80,3 +80,8 @@
 .container input:checked ~ .checkmark:after {
   display: block;
 }
+
+.trash:hover {
+  color: #E25858;
+  cursor: pointer;
+}

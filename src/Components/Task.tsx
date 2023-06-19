@@ -2,11 +2,22 @@ import { Trash } from "@phosphor-icons/react";
 import { useState } from "react";
 import "./Task.css";
 
-export function Task({ task }: { task: string }) {
+interface CommentProps {
+  task: string;
+  deleteTask: (content: string) => void;
+  setMarkedTasks: (number: number) => VoidFunction;
+}
+
+export function Task({ task, deleteTask, setMarkedTasks }: CommentProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   function ChangeisChecked() {
     setIsChecked(!isChecked);
+    return isChecked ? setMarkedTasks(1) : (setMarkedTasks(0));
+  }
+
+  function deleteThisTask() {
+    deleteTask(task);
   }
 
   return (
@@ -16,7 +27,7 @@ export function Task({ task }: { task: string }) {
         <input type="checkbox" />
         <span className="checkmark" onClick={ChangeisChecked}></span>
       </label>
-      <Trash size={24} />
+      <Trash size={24} className="trash" onClick={deleteThisTask} />
     </div>
   );
 }
