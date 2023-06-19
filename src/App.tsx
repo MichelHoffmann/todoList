@@ -9,7 +9,7 @@ import { Task } from "./Components/Task";
 function App() {
   const [tasks, setTasks] = useState<string[]>([]);
   const [taskInput, setTaskInput] = useState("");
-  const [markedTasks, setMarkedTasks] = useState(0);
+  const markedTasks = 0;
 
   function handleNewTask(event: React.ChangeEvent<HTMLInputElement>) {
     setTaskInput(event.target.value);
