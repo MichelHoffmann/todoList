@@ -85,12 +85,7 @@ function App() {
                 );
               } else {
                 return (
-                  <Task
-                    key={nextId()}
-                    task={task}
-                    deleteTask={deleteTask}
-                    setMarkedTasks={setMarkedTasks}
-                  />
+                  <Task key={nextId()} task={task} deleteTask={deleteTask} />
                 );
               }
             })}

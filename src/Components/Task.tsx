@@ -5,15 +5,13 @@ import "./Task.css";
 interface CommentProps {
   task: string;
   deleteTask: (content: string) => void;
-  setMarkedTasks: (number: number) => VoidFunction;
 }
 
-export function Task({ task, deleteTask, setMarkedTasks }: CommentProps) {
+export function Task({ task, deleteTask }: CommentProps) {
   const [isChecked, setIsChecked] = useState(false);
 
   function ChangeisChecked() {
     setIsChecked(!isChecked);
-    return isChecked ? setMarkedTasks(1) : (setMarkedTasks(0));
   }
 
   function deleteThisTask() {
